@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Snow Effect</title>
+        <style>
+            body {
+                margin: 0;
+                background: #191919;
+            }
+
+            .container {
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .snowflake {
+                display: inline-block;
+                color: #ffffff;
+                font-size: 3rem;
+                padding: 1rem;
+                animation: falling 2s linear forwards infinite;
+                transform: translateY(-20vh);
+            }
+
+            .snowflake::before {
+                content: '*';
+            }
+
+            @keyframes falling {
+                from {
+                    transform: translateY(-20vh);
+                }
+                to {
+                    transform: translateY(100vh);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="snowflake"></div>
+        </div>
+        <script>
+            const container = document.querySelector('.container');
+            const snowflake = document.querySelector('.snowflake');
+
+            function appendSnowflake() {
+                const newSnowflake = snowflake.cloneNode(true);
+
+                // Each snowflake looks and behaves a little different:
+                newSnowflake.style.paddingLeft = Math.random() * 10 + 'px';
+                newSnowflake.style.animationDuration =
+                    Math.random() * 5 + 3 + 's';
+                newSnowflake.style.opacity = Math.random() * 1;
+
+                container.append(newSnowflake);
+            }
+
+            const interval = setInterval(appendSnowflake, 50);
+
+            setTimeout(() => {
+                clearInterval(interval);
+            }, 2000);
+        </script>
+    </body>
+</html>
